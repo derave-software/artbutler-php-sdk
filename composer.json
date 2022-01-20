@@ -1,0 +1,9 @@
+{
+    "name": "derave-software/artbutler-php-sdk",
+    "authors": [
+        {
+            "name": "derave-software"
+        }
+    ],
+    "require": {}
+}
