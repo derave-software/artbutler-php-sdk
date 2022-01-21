@@ -5,5 +5,10 @@
             "name": "derave-software"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "ArtbutlerPhpSdk\\": "src/"
+        }
+    },
     "require": {}
 }
