@@ -10,5 +10,7 @@
             "ArtbutlerPhpSdk\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "gmostafa/php-graphql-client": "*"
+    }
 }
