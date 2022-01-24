@@ -2,25 +2,60 @@
 
 namespace ArtbutlerPhpSdk\Repositories;
 
+use ArtbutlerPhpSdk\Authorization\Auth;
 use ArtbutlerPhpSdk\GraphQlApiClient;
 use ArtbutlerPhpSdk\GraphQL\Work;
-use GuzzleHttp\Client;
+use GraphQL\Client;
+use GraphQL\Query;
 
 
 class WorkRepository
 {
-    protected GraphQlApiClient $apiClient;
+    protected Client $apiClient;
 
-    public function __construct(){
-        $this->apiClient = (new GraphQlApiClient());
+    public function __construct(string $endpoint, string $token, string $tenantId)
+    {
+        $this->apiClient = (new Client(
+            'http://app/graphql',
+            [],
+            [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $token,
+                    'Tenant' => $tenantId
+                ],
+            ]
+        ));
+
     }
 
-    public function getAll()
+    public function getWorks(int $first, int $page)
     {
-        $token = $this->apiClient->getToken();
 
-       return $response = $this->apiClient->post([
-           'query' =>Work::getQuery()
-       ], $token)->getContent();
+        $gql = (new Query('works'))
+            ->setArguments(['first' => $first, 'page' => $page])
+            ->setSelectionSet(
+                [
+                    (new Query('data'))->setSelectionSet(
+                        Work::getSubSelectionArray()
+                    )
+                ]
+            );
+
+        $response = $this->apiClient->runQuery($gql);
+
+        return $response->getData();
+    }
+
+    public function getWork(string $id)
+    {
+        $gql = (new Query('work'))
+            ->setArguments(['id' => $id])
+            ->setSelectionSet(
+                Work::getSubSelectionArray()
+            );
+
+        $response = $this->apiClient->runQuery($gql);
+
+        return $response->getData();
     }
 }
