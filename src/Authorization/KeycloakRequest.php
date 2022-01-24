@@ -18,7 +18,7 @@ abstract class KeycloakRequest
 
     public function __construct()
     {
-        
+
     }
 
     protected function getRealmUrl(): string
@@ -34,25 +34,10 @@ abstract class KeycloakRequest
     public function make(): Response
     {
         $response = $this->makeRequest();
-
-        $this->handleResponseError($response);
-
+        
         return $response;
     }
 
-    protected function handleResponseError(Response $response): void
-    {
-
-        if(!$response->getStatusCode() == 200) {
-            throw new HttpClientException(sprintf(
-                'Keycloak request to url %s with params %s  returned status %s with content: %s',
-                json_encode($this->getParams()),
-                $this->getUrl(),
-                $response->status(),
-                json_encode($response->json())
-            ));
-        }
-    }
 
     protected function getHeaders(): array
     {
