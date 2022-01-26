@@ -8,10 +8,10 @@
     "autoload": {
         "psr-4": {
             "ArtbutlerPhpSdk\\": "src/",
-            "Firebase\\JWT\\": "src"
         }
     },
     "require": {
-        "gmostafa/php-graphql-client": "*"
+        "gmostafa/php-graphql-client": "*",
+        "firebase/php-jwt": "^5.0"
     }
 }
