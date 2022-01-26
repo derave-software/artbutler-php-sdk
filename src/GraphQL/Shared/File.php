@@ -2,11 +2,12 @@
 
 namespace ArtbutlerPhpSdk\GraphQL\Shared;
 
+use ArtbutlerPhpSdk\GraphQL\Concerns\HasSubSelection;
 use GraphQL\Query;
 
-class File
+class File implements HasSubSelection
 {
-    public static function getSubSelectionArray()
+    public static function getSubSelectionArray(): array
     {
         return [
             'id',

@@ -46,7 +46,9 @@ class Work implements HasSubSelection
             static::getDimension('plate_size'),
             static::getDimension('plinth_size'),
             static::getDimension('vitrine_size'),
-            Tag::getSubSelectionArray(),
+            (new Query('tags'))->setSelectionSet(
+                Tag::getSubSelectionArray()
+            ),
             Utils::getAttachment('images'),
             Utils::getAttachment('documents'),
             'created_at',
@@ -59,7 +61,7 @@ class Work implements HasSubSelection
         ];
     }
 
-    public static function getPrices()
+    public static function getPrices(): Query
     {
         return (new Query('prices'))->setSelectionSet(
             [
@@ -72,7 +74,7 @@ class Work implements HasSubSelection
         );
     }
 
-    public static function getDimension(string $name)
+    public static function getDimension(string $name): Query
     {
         return (new Query($name))->setSelectionSet(
             [

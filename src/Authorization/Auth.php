@@ -1,4 +1,5 @@
 <?php
+
 namespace ArtbutlerPhpSdk\Authorization;
 
 use Firebase\JWT\JWT;
@@ -9,7 +10,6 @@ class Auth
 {
     private GetAccesTokenRequest $getAccesTokenRequest;
     public string $token;
-
 
     public function __construct(
         protected string $keycloakBaseUrl,
@@ -27,26 +27,10 @@ class Auth
         ));
     }
 
-    public function tokenIsValid()
+    public function getToken(): string
     {
-        try {
-            JWT::decode($this->token, static::buildPublicKey($this->publicKey),['RS256']);
-        } catch(\Firebase\JWT\ExpiredException $e){
-            return false;
-        } 
-        
-        return true;
-    }
-
-    private static function buildPublicKey(string $key)
-    {
-        return "-----BEGIN PUBLIC KEY-----\n" . wordwrap($key, 64, "\n", true) . "\n-----END PUBLIC KEY-----";
-    }
-
-    public function getToken()
-    {
-        if(isset($this->token)){
-            if(!$this->tokenIsValid()){
+        if (isset($this->token)) {
+            if (!$this->tokenIsNotExpired()) {
                 $this->token = $this->getNewToken($this->token);
             }
         } else {
@@ -56,8 +40,26 @@ class Auth
         return $this->token;
     }
 
-    public function getNewToken(){
+    public function getNewToken(): string
+    {
         $this->getAccesTokenRequest->make();
         return $this->getAccesTokenRequest->getTokenFromResponse();
     }
+
+    public function tokenIsNotExpired(): bool
+    {
+        try {
+            JWT::decode($this->token, static::buildPublicKey($this->publicKey), ['RS256']);
+        } catch (\Firebase\JWT\ExpiredException $e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private static function buildPublicKey(string $key)
+    {
+        return "-----BEGIN PUBLIC KEY-----\n" . wordwrap($key, 64, "\n", true) . "\n-----END PUBLIC KEY-----";
+    }
+
 }

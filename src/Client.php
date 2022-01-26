@@ -28,7 +28,7 @@ class Client
         ));
     }
 
-    public function getToken()
+    public function getToken(): string
     {
         return $this->auth->getToken();
     }
