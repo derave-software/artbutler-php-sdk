@@ -2,15 +2,16 @@
 namespace ArtbutlerPhpSdk\ModelClients;
 
 use ArtbutlerPhpSdk\DTOs\WorkDTO;
-use GraphQL\Client;
+
 use GuzzleHttp\Promise\Promise;
 use ArtbutlerPhpSdk\Queries\Work\GetWorksQuery;
 use ArtbutlerPhpSdk\Queries\Work\GetWorkQuery;
 use ArtbutlerPhpSdk\GraphQLClient;
+use ArtbutlerPhpSdk\Client;
 
 class WorkClient extends ModelClient
 {
-    public function __construct(protected \ArtbutlerPhpSdk\Client $client)
+    public function __construct(protected Client $client)
     {
         $this->apiClient = (new GraphQLClient($client));
     }

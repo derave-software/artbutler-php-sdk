@@ -1,5 +1,6 @@
 Example usage:
-
+===============
+```php
     $client = (new \ArtbutlerPhpSdk\Client(
     'GraphQL endpoint',
     'Keycloak endpoint',
@@ -22,3 +23,4 @@ Example usage:
     ];
 
     $client->resolvePromises($promises);
+```
