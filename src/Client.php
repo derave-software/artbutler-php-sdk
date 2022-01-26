@@ -6,6 +6,8 @@ use ArtbutlerPhpSdk\Authorization\Auth;
 
 class Client
 {
+    protected string $token;
+
     public function __construct(
         public string $gqlEndpoint,
         private string $keycloakBaseUrl,
@@ -15,15 +17,43 @@ class Client
         public string $tenantId
     )
     {
-    }
-
-    public function getToken(){
-        return (new Auth(
+        $this->auth = (new Auth(
             $this->keycloakBaseUrl,
             $this->realm,
             $this->clientId,
             $this->clientSecret
-        ))->getToken();
+        ));
+    }
+
+    public function getToken()
+    {
+        if(isset($this->token)){
+            if($this->tokenIsValid()){
+                return $this->token;
+            } else {
+                $this->token = $this->refreshToken($this->token);
+                return $this->token;
+            }
+        } else {
+            $this->token = $this->getTokenFromKeycloak();
+            return $this->token;
+        }
+    }
+
+    public function tokenIsValid()
+    {
+
+        return $this->auth->getToken();
+    }
+
+    public function getTokenFromKeycloak()
+    {
+        return $this->auth->getToken();
+    }
+
+    public function refreshToken()
+    {
+        return $this->auth->refreshToken();
     }
 
 }
