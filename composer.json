@@ -12,6 +12,6 @@
     },
     "require": {
         "gmostafa/php-graphql-client": "*",
-        "Firebase\\JWT\\": "src"
+        "Firebase\\JWT\\": "src/"
     }
 }
