@@ -12,10 +12,7 @@ class WorkClient extends ModelClient
 {
     public function __construct(protected \ArtbutlerPhpSdk\Client $client)
     {
-        $this->apiClient = (new GraphQLClient(
-            $this->client->gqlEndpoint,
-            $this->client->tenantId,
-        ));
+        $this->apiClient = (new GraphQLClient($client));
     }
 
     /**
@@ -26,7 +23,6 @@ class WorkClient extends ModelClient
      */
     public function getWorks(int $first, int $page, array $filters): Promise
     {
-        $this->apiClient->setToken($this->client->getToken());
         return (new GetWorksQuery($this->apiClient))($first, $page, $filters);
     }
 
@@ -36,7 +32,6 @@ class WorkClient extends ModelClient
      */
     public function getWork(string $id): Promise
     {
-        $this->apiClient->setToken($this->client->getToken());
         return (new GetWorkQuery($this->apiClient))($id);
     }
 }

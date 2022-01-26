@@ -3,10 +3,11 @@
 namespace ArtbutlerPhpSdk;
 
 use ArtbutlerPhpSdk\Authorization\Auth;
+use Firebase\JWT\JWT;
 
 class Client
 {
-    protected string $token;
+    private Auth $auth;
 
     public function __construct(
         public string $gqlEndpoint,
@@ -14,6 +15,7 @@ class Client
         private string $realm,
         private string $clientId,
         private string $clientSecret,
+        private string $publicKey,
         public string $tenantId
     )
     {
@@ -21,39 +23,20 @@ class Client
             $this->keycloakBaseUrl,
             $this->realm,
             $this->clientId,
-            $this->clientSecret
+            $this->clientSecret,
+            $this->publicKey
         ));
     }
 
     public function getToken()
     {
-        if(isset($this->token)){
-            if($this->tokenIsValid()){
-                return $this->token;
-            } else {
-                $this->token = $this->refreshToken($this->token);
-                return $this->token;
-            }
-        } else {
-            $this->token = $this->getTokenFromKeycloak();
-            return $this->token;
-        }
-    }
-
-    public function tokenIsValid()
-    {
-
         return $this->auth->getToken();
     }
 
-    public function getTokenFromKeycloak()
+    public function resolvePromises(array $promises): array
     {
-        return $this->auth->getToken();
+        return \GuzzleHttp\Promise\Utils::unwrap($promises);
     }
 
-    public function refreshToken()
-    {
-        return $this->auth->refreshToken();
-    }
 
 }

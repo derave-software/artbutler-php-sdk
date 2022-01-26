@@ -10,4 +10,7 @@ abstract class ModelClient
     protected GraphQLClient $apiClient;
 
     abstract public function __construct(\ArtbutlerPhpSdk\Client $client);
+    
+    
 }
+ 

@@ -50,6 +50,7 @@ class GetAccesTokenRequest extends KeycloakRequest
     public function getTokenFromResponse(): string
     {
         $responseBody = json_decode($this->response->getBody()->getContents(), true);
+
         return (string)$responseBody['access_token'];
     }
 }

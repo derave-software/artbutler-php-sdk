@@ -17,20 +17,21 @@ use Psr\Http\Client\ClientInterface;
 class GraphQLClient extends \GraphQL\Client
 {
 
-    public function __construct(string $endpointUrl, string $tenantId)
+    public function __construct(protected Client $client, array $httpOptions = [])
     {
-        parent::__construct( $endpointUrl, [],
+        parent::__construct($client->gqlEndpoint, [],
             [
                 'headers' => [
-                    'Tenant' => $tenantId
+                    'Tenant' => $client->tenantId
                 ],
-            ]
+            ],
+            new \GuzzleHttp\Client($httpOptions)
         );
     }
 
-    public function setToken(string $token)
+    public function setToken(): void
     {
-        $this->httpHeaders['Authorization'] = 'Bearer ' . $token;
+        $this->httpHeaders['Authorization'] = 'Bearer ' . $this->client->getToken();
     }
 
     public function runQueryAsync($query, bool $resultsAsArray = false, array $variables = []): Promise
@@ -49,6 +50,8 @@ class GraphQLClient extends \GraphQL\Client
 
     public function runRawQueryAsync(string $queryString, $resultsAsArray = false, array $variables = []): Promise
     {
+        $this->setToken();
+
         $request = new Request($this->requestMethod, $this->endpointUrl);
 
         foreach($this->httpHeaders as $header => $value) {
@@ -67,7 +70,6 @@ class GraphQLClient extends \GraphQL\Client
 
         // Send api request and get response
         try {
-            $this->httpClient = new \GuzzleHttp\Client($this->options);
             $promise = $this->httpClient->sendAsync($request);
         }
         catch (ClientException $exception) {
