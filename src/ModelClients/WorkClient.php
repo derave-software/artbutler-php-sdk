@@ -1,6 +1,7 @@
 <?php
 namespace ArtbutlerPhpSdk\ModelClients;
 
+use ArtbutlerPhpSdk\DTOs\Filters\FiltersCollection;
 use ArtbutlerPhpSdk\DTOs\WorkDTO;
 
 use GuzzleHttp\Promise\Promise;
@@ -22,7 +23,7 @@ class WorkClient extends ModelClient
      * @param array $filters
      * @return Promise<[WorkDTO]>
      */
-    public function getWorks(int $first, int $page, array $filters): Promise
+    public function getWorks(int $first, int $page, ?FiltersCollection $filters = null): Promise
     {
         return (new GetWorksQuery($this->apiClient))($first, $page, $filters);
     }

@@ -1,9 +1,11 @@
 <?php
 namespace ArtbutlerPhpSdk\Queries\Work;
+use ArtbutlerPhpSdk\DTOs\Filters\FiltersCollection;
 use ArtbutlerPhpSdk\DTOs\WorkDTO;
 use ArtbutlerPhpSdk\GraphQL\Work;
 use ArtbutlerPhpSdk\GraphQLClient;
 use GraphQL\Query;
+use GraphQL\RawObject;
 use GraphQL\Results;
 use GuzzleHttp\Promise\Promise;
 
@@ -13,10 +15,14 @@ class GetWorksQuery
     {
     }
 
-    public function __invoke(int $first, int $page, array $filters, array $subSelections = []): Promise
+    public function __invoke(int $first, int $page, ?FiltersCollection $filters = null, array $subSelections = []): Promise
     {
             $gql = (new Query('works'))
-                ->setArguments(['first' => $first, 'page' => $page])
+                ->setArguments([
+                    'first' => $first,
+                    'page' => $page,
+                    'filters' => $filters->createQueryArgument()
+                ])
                 ->setSelectionSet(
                     [
                         (new Query('data'))->setSelectionSet(
@@ -24,6 +30,8 @@ class GetWorksQuery
                         )
                     ]
                 );
+
+
 
             return $this->apiClient->runQueryAsync($gql,true)->then(function(Results $response) {
                 $data = $response->getData();
