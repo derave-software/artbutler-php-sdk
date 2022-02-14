@@ -4,13 +4,13 @@ namespace ArtbutlerPhpSdk\ModelClients;
 use ArtbutlerPhpSdk\DTOs\Filters\FiltersCollection;
 use ArtbutlerPhpSdk\DTOs\WorkDTO;
 
+use ArtbutlerPhpSdk\Queries\Page\GetPageQuery;
 use GuzzleHttp\Promise\Promise;
-use ArtbutlerPhpSdk\Queries\Work\GetWorksQuery;
-use ArtbutlerPhpSdk\Queries\Work\GetWorkQuery;
+use ArtbutlerPhpSdk\Queries\Page\GetPagesQuery;
 use ArtbutlerPhpSdk\GraphQLClient;
 use ArtbutlerPhpSdk\Client;
 
-class WorkClient extends ModelClient
+class PageClient extends ModelClient
 {
     public function __construct(protected Client $client)
     {
@@ -23,17 +23,19 @@ class WorkClient extends ModelClient
      * @param array $filters
      * @return Promise<[WorkDTO]>
      */
-    public function getWorks(int $first, int $page, ?FiltersCollection $filters = null): Promise
+    public function getPages(int $first, int $page): Promise
     {
-        return (new GetWorksQuery($this->apiClient))($first, $page, $filters);
+        return (new GetPagesQuery($this->apiClient))($first, $page);
     }
 
     /**
      * @param string $id
-     * @return Promise<WorkDTO>
+     * @return Promise
      */
-    public function getWork(string $id): Promise
+    public function getPage(string $id): Promise
     {
-        return (new GetWorkQuery($this->apiClient))($id);
+        return (new GetPageQuery($this->apiClient))($id);
     }
+
+
 }
