@@ -3,6 +3,7 @@
 namespace ArtbutlerPhpSdk\GraphQL;
 
 use ArtbutlerPhpSdk\GraphQL\Shared\File;
+use ArtbutlerPhpSdk\GraphQL\Shared\FilterInputType;
 use GraphQL\Query;
 
 class Utils
@@ -35,6 +36,13 @@ class Utils
     {
         return (new Query($fileField))->setSelectionSet(
             File::getSubSelectionArray()
+        );
+    }
+    
+    public static function getFilters(string $fileField):Query
+    {
+        return (new Query($fileField))->setSelectionSet(
+            FilterInputType::getSubSelectionArray()
         );
     }
 

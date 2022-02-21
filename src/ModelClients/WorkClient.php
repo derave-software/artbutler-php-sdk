@@ -5,8 +5,8 @@ use ArtbutlerPhpSdk\DTOs\Filters\FiltersCollection;
 use ArtbutlerPhpSdk\DTOs\WorkDTO;
 
 use GuzzleHttp\Promise\Promise;
-use ArtbutlerPhpSdk\Queries\Work\GetWorksQuery;
-use ArtbutlerPhpSdk\Queries\Work\GetWorkQuery;
+use ArtbutlerPhpSdk\Queries\Work\GetWorks;
+use ArtbutlerPhpSdk\Queries\Work\GetWork;
 use ArtbutlerPhpSdk\GraphQLClient;
 use ArtbutlerPhpSdk\Client;
 
@@ -25,7 +25,7 @@ class WorkClient extends ModelClient
      */
     public function getWorks(int $first, int $page, ?FiltersCollection $filters = null): Promise
     {
-        return (new GetWorksQuery($this->apiClient))($first, $page, $filters);
+        return (new GetWorks($this->apiClient))($first, $page, $filters);
     }
 
     /**
@@ -34,6 +34,6 @@ class WorkClient extends ModelClient
      */
     public function getWork(string $id): Promise
     {
-        return (new GetWorkQuery($this->apiClient))($id);
+        return (new GetWork($this->apiClient))($id);
     }
 }

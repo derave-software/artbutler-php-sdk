@@ -8,23 +8,20 @@ use ArtbutlerPhpSdk\GraphQL\Shared\Tag;
 use ArtbutlerPhpSdk\GraphQL\Concerns\HasSubSelection;
 use GraphQL\Query;
 
-class Page implements HasSubSelection
+class Presentation implements HasSubSelection
 {
     public static function getSubSelectionArray(): array
     {
         return [
             'id',
-            Utils::getTranslation('name'),
-            'type',
-            'slug',
-            'show_in_main_menu',
-            'show_in_footer_menu',
+            'draft',
+            Utils::getTranslation('title'),
+            Utils::getTranslation('description'),
+            'theme',
             'published',
-            'order_column',
-            'password',
-            (new Query('blocks'))->setSelectionSet(
-                Block::getSubSelectionArray()
-            )
+            'public_url',
+            Utils::getAttachment('images'),
+            Utils::getAttachment('documents'),
         ];
     }
 

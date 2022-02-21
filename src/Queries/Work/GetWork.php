@@ -7,7 +7,7 @@ use GraphQL\Query;
 use GraphQL\Results;
 use GuzzleHttp\Promise\Promise;
 
-class GetWorkQuery
+class GetWork
 {
     public function __construct(protected GraphQLClient $apiClient)
     {

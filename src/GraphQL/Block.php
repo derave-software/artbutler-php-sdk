@@ -17,9 +17,9 @@ class Block implements HasSubSelection
     {
         return [
                 'id',
+                'type',
                 (new Query('config'))->setSelectionSet(
                     [
-                        ArtistsList::getInlineFragment(),
                         ShowroomsList::getInlineFragment()
                     ]
                 )

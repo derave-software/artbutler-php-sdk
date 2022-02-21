@@ -74,9 +74,8 @@ class GraphQLClient extends \GraphQL\Client
         }
         catch (ClientException $exception) {
         }
-
-//        dd(json_encode($promise->wait()->getBody()->getContents()));
         return $promise->then(function(Response $response) {
+  
             return new Results($response, true);
         });
     }

@@ -11,13 +11,13 @@ use ArtbutlerPhpSdk\GraphQL\Concerns\HasSubSelection;
 use GraphQL\InlineFragment;
 use GraphQL\Query;
 
-class ShowroomsList implements HasSubSelection, IsInlineFragment
+class WorksList implements HasSubSelection, IsInlineFragment
 {
     public static function getInlineFragment(): InlineFragment
     {
         $subSelectionArray =  self::getSubSelectionArray();
 
-        return (new InlineFragment('ShowroomsList'))
+        return (new InlineFragment('WorksList'))
             ->setSelectionSet(
                 $subSelectionArray
             );
@@ -26,17 +26,12 @@ class ShowroomsList implements HasSubSelection, IsInlineFragment
     public static function getSubSelectionArray(): array
     {
         return  [
-            Utils::getFilters('filters'),
+            'type',
             'slug',
-            'visibleFields',
             'layout',
-            Utils::getTranslation('heading'),
-            (new Query('subsections'))->setSelectionSet(
-                [
-                    Documents::getInlineFragment()
-                ]
-            )
-
+            'visibleFields',
+            'enquireEnabled',
+            'favoritesEnabled',
         ];
     }
 

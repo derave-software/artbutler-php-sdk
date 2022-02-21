@@ -26,7 +26,6 @@ class ArtistsList implements HasSubSelection, IsInlineFragment
     public static function getSubSelectionArray(): array
     {
         return  [
-            'type',
             Utils::getTranslation('heading'),
             'slug',
             'visibleFields',

@@ -4,9 +4,9 @@ namespace ArtbutlerPhpSdk\ModelClients;
 use ArtbutlerPhpSdk\DTOs\Filters\FiltersCollection;
 use ArtbutlerPhpSdk\DTOs\WorkDTO;
 
-use ArtbutlerPhpSdk\Queries\Page\GetPageQuery;
+use ArtbutlerPhpSdk\Queries\Page\GetPage;
 use GuzzleHttp\Promise\Promise;
-use ArtbutlerPhpSdk\Queries\Page\GetPagesQuery;
+use ArtbutlerPhpSdk\Queries\Page\GetPages;
 use ArtbutlerPhpSdk\GraphQLClient;
 use ArtbutlerPhpSdk\Client;
 
@@ -25,7 +25,7 @@ class PageClient extends ModelClient
      */
     public function getPages(int $first, int $page): Promise
     {
-        return (new GetPagesQuery($this->apiClient))($first, $page);
+        return (new GetPages($this->apiClient))($first, $page);
     }
 
     /**
@@ -34,7 +34,7 @@ class PageClient extends ModelClient
      */
     public function getPage(string $id): Promise
     {
-        return (new GetPageQuery($this->apiClient))($id);
+        return (new GetPage($this->apiClient))($id);
     }
 
 
