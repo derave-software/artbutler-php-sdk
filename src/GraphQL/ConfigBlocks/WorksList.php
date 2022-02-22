@@ -26,12 +26,14 @@ class WorksList implements HasSubSelection, IsInlineFragment
     public static function getSubSelectionArray(): array
     {
         return  [
+            Utils::getFilters('filters'),
             'type',
             'slug',
             'layout',
             'visibleFields',
             'enquireEnabled',
             'favoritesEnabled',
+            'active'
         ];
     }
 
