@@ -15,11 +15,6 @@ use ArtbutlerPhpSdk\Client;
 
 class ShowroomClient extends ModelClient
 {
-    public function __construct(protected Client $client)
-    {
-        $this->apiClient = (new GraphQLClient($client));
-    }
-
     /**
      * @param int $first
      * @param int $page

@@ -12,12 +12,7 @@ use ArtbutlerPhpSdk\Client;
 
 class WorkClient extends ModelClient
 {
-    public function __construct(protected Client $client)
-    {
-        $this->apiClient = (new GraphQLClient($client));
-    }
-
-    /**
+       /**
      * @param int $first
      * @param int $page
      * @param array $filters

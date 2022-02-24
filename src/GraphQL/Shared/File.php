@@ -14,6 +14,7 @@ class File implements HasSubSelection
             'filename',
             'mime',
             'url',
+            'thumbnail'
         ];
     }
 }

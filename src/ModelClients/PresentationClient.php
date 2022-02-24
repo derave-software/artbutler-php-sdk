@@ -16,11 +16,6 @@ use ArtbutlerPhpSdk\Client;
 
 class PresentationClient extends ModelClient
 {
-    public function __construct(protected Client $client)
-    {
-        $this->apiClient = (new GraphQLClient($client));
-    }
-
     /**
      * @param int $id
      * @return Promise

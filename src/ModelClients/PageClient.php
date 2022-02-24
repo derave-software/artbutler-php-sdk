@@ -12,11 +12,6 @@ use ArtbutlerPhpSdk\Client;
 
 class PageClient extends ModelClient
 {
-    public function __construct(protected Client $client)
-    {
-        $this->apiClient = (new GraphQLClient($client));
-    }
-
     /**
      * @param int $first
      * @param int $page
