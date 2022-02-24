@@ -35,6 +35,13 @@ class ShowroomClient extends ModelClient
         return (new GetShowroom($this->apiClient))($id);
     }
 
+    public function getShowroomsWithWorks(int $first, int $page, ?FiltersCollection $filters = null): Promise
+    {
+        return (new GetShowrooms($this->apiClient))($first, $page, $filters, [
+            ...Showroom::getSubSelectionArray(),
+            GetWorks::getQuery(10000, 1, [], null)
+        ]);
+    }
 
     /**
      * @param int $first works pagination
