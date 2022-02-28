@@ -32,13 +32,12 @@ class GetDocuments
      */
     public static function getQuery(?FiltersCollection $filters, array $subSelections): Query
     {
-
         $gql = (new Query('documents'))
             ->setArguments(['filters' => $filters->createQueryArgument()])
             ->setSelectionSet(
                 empty($subSelections) ? Attachment::getSubSelectionArray() : $subSelections
             );
-
+  
         return $gql;
     }
 }
