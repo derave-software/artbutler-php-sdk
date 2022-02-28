@@ -34,6 +34,7 @@ class Work implements HasSubSelection
             (new Query('year'))->setSelectionSet([
                 'type',
                 'description',
+                'exact',
                 'from',
                 'to'
             ]),
