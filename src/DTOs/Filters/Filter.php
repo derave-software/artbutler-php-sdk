@@ -6,7 +6,7 @@ class Filter
     public function __construct(
         public string $type,
         public string $operator,
-        public string $data,
+        public ?string $data,
     ){
     }
 
@@ -18,7 +18,7 @@ class Filter
             $data['value']['data'],
         );
     }
-    
+
     public function createArgumentQuery(): string
     {
         return '

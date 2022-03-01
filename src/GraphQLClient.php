@@ -75,7 +75,6 @@ class GraphQLClient extends \GraphQL\Client
         catch (ClientException $exception) {
         }
         return $promise->then(function(Response $response) {
-  
             return new Results($response, true);
         });
     }

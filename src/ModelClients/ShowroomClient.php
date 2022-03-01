@@ -3,6 +3,7 @@ namespace ArtbutlerPhpSdk\ModelClients;
 
 use ArtbutlerPhpSdk\DTOs\Filters\FiltersCollection;
 use ArtbutlerPhpSdk\DTOs\WorkDTO;
+use ArtbutlerPhpSdk\GraphQL\CESWork;
 use ArtbutlerPhpSdk\GraphQL\Showroom;
 use ArtbutlerPhpSdk\GraphQL\Work;
 use ArtbutlerPhpSdk\Queries\Work\GetWorks;
@@ -57,7 +58,7 @@ class ShowroomClient extends ModelClient
     {
         $subSelections = [
             ...Showroom::getSubSelectionArray(),
-            GetWorks::getQuery($first, $page, [], $filters)
+            GetWorks::getQuery($first, $page, CESWork::getSubSelectionArray(), $filters)
         ];
 
         return (new GetShowroom($this->apiClient))($id, $subSelections);

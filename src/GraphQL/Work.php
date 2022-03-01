@@ -34,6 +34,7 @@ class Work implements HasSubSelection
             (new Query('year'))->setSelectionSet([
                 'type',
                 'description',
+                'exact',
                 'from',
                 'to'
             ]),
@@ -55,7 +56,10 @@ class Work implements HasSubSelection
             static::getPrices(),
             (new Query('artists'))->setSelectionSet(
                 [
-                    'id'
+                    'id',
+                    'first_name',
+                    'last_name',
+
                 ]
             )
         ];
