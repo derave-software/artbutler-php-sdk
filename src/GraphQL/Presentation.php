@@ -22,6 +22,7 @@ class Presentation implements HasSubSelection
             'public_url',
             Utils::getAttachment('images'),
             Utils::getAttachment('documents'),
+            Utils::getAttachment('coverImageAttachment'),
         ];
     }
 
