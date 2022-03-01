@@ -3,6 +3,7 @@
 namespace ArtbutlerPhpSdk\GraphQL;
 
 use ArtbutlerPhpSdk\GraphQL\ConfigBlocks\ArtistsList;
+use ArtbutlerPhpSdk\GraphQL\ConfigBlocks\Documents;
 use ArtbutlerPhpSdk\GraphQL\ConfigBlocks\ShowroomDetails;
 use ArtbutlerPhpSdk\GraphQL\ConfigBlocks\ShowroomsList;
 use ArtbutlerPhpSdk\GraphQL\VocabularyItem;
@@ -22,7 +23,8 @@ class Block implements HasSubSelection
                 (new Query('config'))->setSelectionSet(
                     [
                         ShowroomsList::getInlineFragment(),
-                        ShowroomDetails::getInlineFragment()
+                        ShowroomDetails::getInlineFragment(),
+                        Documents::getInlineFragment()
                     ]
                 )
             ];
