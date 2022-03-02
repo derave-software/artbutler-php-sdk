@@ -22,7 +22,7 @@ class Showroom implements HasSubSelection
             'published',
             Utils::getAttachment('images'),
             Utils::getAttachment('documents'),
-            Utils::getFile('coverImage'),
+            Utils::getAttachment('coverImageAttachment'),
             (new Query('tags'))->setSelectionSet(
                 Tag::getSubSelectionArray()
             ),
