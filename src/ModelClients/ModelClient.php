@@ -23,4 +23,10 @@ abstract class ModelClient
         return $this->client->resolvePromises($promises);
     }
 
+    public function getTenantId(): string
+    {
+        return $this->client->tenantId;
+    }
+
+
 }
