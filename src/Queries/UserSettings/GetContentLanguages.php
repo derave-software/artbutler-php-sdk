@@ -17,15 +17,12 @@ class GetContentLanguages
 
     public function __invoke(string $id, array $subSelections = []): Promise
     {
-
-    ;
         $gql = (new Query('contentLanguagesSettings'))
             ->setArguments(['id' => $id])
             ->setSelectionSet(
                 empty($subSelections) ? ContentLanguages::getSubSelectionArray() : $subSelection
             );
-
-      
+        
         return $this->apiClient->runQueryAsync($gql,true)->then(function(Results $response) {
             return $response->getData();
         });
