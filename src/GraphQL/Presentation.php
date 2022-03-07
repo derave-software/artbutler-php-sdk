@@ -18,6 +18,8 @@ class Presentation implements HasSubSelection
             Utils::getTranslation('title'),
             Utils::getTranslation('description'),
             'theme',
+            'logoFallback',
+            'show_logo',
             'published',
             'public_url',
             Utils::getAttachment('images'),
