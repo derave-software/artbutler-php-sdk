@@ -7,7 +7,7 @@ use ArtbutlerPhpSdk\DTOs\WorkDTO;
 use ArtbutlerPhpSdk\GraphQL\Page;
 use ArtbutlerPhpSdk\GraphQL\Presentation;
 use ArtbutlerPhpSdk\Queries\Page\GetPage;
-use ArtbutlerPhpSdk\Queries\Presentation\GetPresentation;
+use ArtbutlerPhpSdk\Queries\Translation\GetTranslations;
 use ArtbutlerPhpSdk\Queries\Documents\GetDocuments;
 use ArtbutlerPhpSdk\Queries\Showroom\GetShowrooms;
 use ArtbutlerPhpSdk\Queries\Page\GetPages;
@@ -16,10 +16,10 @@ use GuzzleHttp\Promise\Promise;
 use ArtbutlerPhpSdk\GraphQLClient;
 use ArtbutlerPhpSdk\Client;
 
-class DocumentsClient extends ModelClient
+class TranslationClient extends ModelClient
 {
-    public function getDocuments(array $categories = [], ?FiltersCollection $filters = null): Promise
+    public function getTranslations(string $group): Promise
     {
-        return (new GetDocuments($this->apiClient))($categories, $filters);
+        return (new GetTranslations($this->apiClient))($group, []);
     }
 }

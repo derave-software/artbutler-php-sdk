@@ -32,7 +32,13 @@ class WorksSlider implements HasSubSelection, IsInlineFragment
             'visibleFields',
             'enquireEnabled',
             'favoritesEnabled',
-            'active'
+            'active',
+            (new Query('prices'))->setSelectionSet(
+                [
+                    'withTax',
+                    'priceType'
+                ]
+            )
         ];
     }
 

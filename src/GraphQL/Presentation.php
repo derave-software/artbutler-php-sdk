@@ -22,6 +22,7 @@ class Presentation implements HasSubSelection
             'show_logo',
             'published',
             'public_url',
+            'password',
             Utils::getAttachment('images'),
             Utils::getAttachment('documents'),
             Utils::getAttachment('coverImageAttachment'),
