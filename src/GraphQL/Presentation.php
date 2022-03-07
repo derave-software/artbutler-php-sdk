@@ -16,6 +16,7 @@ class Presentation implements HasSubSelection
             'id',
             'draft',
             Utils::getTranslation('title'),
+            Utils::getTranslation('contact_address'),
             Utils::getTranslation('description'),
             'theme',
             'logoFallback',
