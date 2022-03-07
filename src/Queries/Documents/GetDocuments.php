@@ -4,6 +4,7 @@ use ArtbutlerPhpSdk\DTOs\Filters\FiltersCollection;
 use ArtbutlerPhpSdk\GraphQL\Showroom;
 use ArtbutlerPhpSdk\GraphQLClient;
 use GraphQL\Query;
+use GraphQL\RawObject;
 use GraphQL\Results;
 use GuzzleHttp\Promise\Promise;
 use ArtbutlerPhpSdk\GraphQL\Attachment;
@@ -14,9 +15,9 @@ class GetDocuments
     {
     }
 
-    public function __invoke(?FiltersCollection $filters = null, array $subSelections = []): Promise
+    public function __invoke(array $categories = [], ?FiltersCollection $filters = null, array $subSelections = []): Promise
     {
-        $gql = self::getQuery($filters, $subSelections);
+        $gql = self::getQuery($categories, $filters, $subSelections);
 
         return $this->apiClient->runQueryAsync($gql,true)->then(function(Results $response) {
             return $response->getData();
@@ -30,14 +31,21 @@ class GetDocuments
      *
      * @return Query
      */
-    public static function getQuery(?FiltersCollection $filters, array $subSelections): Query
+    public static function getQuery(array $categories, ?FiltersCollection $filters, array $subSelections): Query
     {
         $gql = (new Query('documents'))
             ->setArguments(['filters' => $filters->createQueryArgument()])
             ->setSelectionSet(
                 empty($subSelections) ? Attachment::getSubSelectionArray() : $subSelections
             );
-  
+
+        if(!empty($categories)) {
+            foreach ($categories as $key => $value) {
+                $categories[$key] =  new RawObject($value);
+            }
+            $gql->setArguments(['categories' => $categories]);
+        }
+
         return $gql;
     }
 }

@@ -18,8 +18,8 @@ use ArtbutlerPhpSdk\Client;
 
 class DocumentsClient extends ModelClient
 {
-    public function getDocuments(?FiltersCollection $filters = null): Promise
+    public function getDocuments(array $categories = [], ?FiltersCollection $filters = null): Promise
     {
-        return (new GetDocuments($this->apiClient))($filters);
+        return (new GetDocuments($this->apiClient))($categories, $filters);
     }
 }
