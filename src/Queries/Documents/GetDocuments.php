@@ -33,8 +33,9 @@ class GetDocuments
      */
     public static function getQuery(array $categories, ?FiltersCollection $filters, array $subSelections): Query
     {
+        $arguments = [];
+
         $gql = (new Query('documents'))
-            ->setArguments(['filters' => $filters->createQueryArgument()])
             ->setSelectionSet(
                 empty($subSelections) ? Attachment::getSubSelectionArray() : $subSelections
             );
@@ -43,8 +44,15 @@ class GetDocuments
             foreach ($categories as $key => $value) {
                 $categories[$key] =  new RawObject($value);
             }
-            $gql->setArguments(['categories' => $categories]);
+            $arguments = array_merge($arguments,['categories' => $categories]);
         }
+
+
+        if(!is_null($filters)) {
+            $arguments = array_merge($arguments, ['filters' => $filters->createQueryArgument()]);
+        }
+
+        $gql->setArguments($arguments);
 
         return $gql;
     }
