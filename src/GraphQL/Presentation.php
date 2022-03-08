@@ -24,6 +24,7 @@ class Presentation implements HasSubSelection
             Utils::getAttachment('images'),
             Utils::getAttachment('documents'),
             Utils::getAttachment('coverImageAttachment'),
+            'enquire_email'
         ];
     }
 
