@@ -30,4 +30,15 @@ class Filter
             }
          }';
     }
+
+    public function toArray()
+    {
+        return [
+            'type' => $this->type,
+            'value' => [
+                'operator' => $this->operator,
+                'data'=> $this->data
+            ]
+        ];
+    }
 }
