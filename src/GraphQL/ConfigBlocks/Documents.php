@@ -28,6 +28,7 @@ class Documents implements HasSubSelection, IsInlineFragment
         return  [
             'type',
             Utils::getFilters('filters'),
+            'search',
             'slug',
             'layout',
             Utils::getTranslation('heading'),

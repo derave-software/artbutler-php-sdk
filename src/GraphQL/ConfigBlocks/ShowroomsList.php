@@ -27,6 +27,7 @@ class ShowroomsList implements HasSubSelection, IsInlineFragment
     {
         return  [
             Utils::getFilters('filters'),
+            'search',
             'slug',
             'visibleFields',
             'layout',

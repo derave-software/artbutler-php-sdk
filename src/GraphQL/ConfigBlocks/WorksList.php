@@ -27,6 +27,7 @@ class WorksList implements HasSubSelection, IsInlineFragment
     {
         return  [
             Utils::getFilters('filters'),
+            'search',
             'type',
             'slug',
             'layout',

@@ -1,6 +1,7 @@
 <?php
 namespace ArtbutlerPhpSdk\Queries\Showroom;
 use ArtbutlerPhpSdk\DTOs\Filters\FiltersCollection;
+use ArtbutlerPhpSdk\DTOs\SearchDTO;
 use ArtbutlerPhpSdk\GraphQLClient;
 use ArtbutlerPhpSdk\GraphQL\Showroom;
 use ArtbutlerPhpSdk\GraphQL\Work;
@@ -14,9 +15,9 @@ class GetShowrooms
     {
     }
 
-    public function __invoke(int $first, int $page, ?FiltersCollection $filters = null, array $subSelections = []): Promise
+    public function __invoke(int $first, int $page, ?FiltersCollection $filters = null, array $subSelections = [], ?SearchDTO $search = null): Promise
     {
-        $gql = self::getQuery($first, $page, $filters, $subSelections);
+        $gql = self::getQuery($first, $page, $filters, $subSelections, $search);
 
         return $this->apiClient->runQueryAsync($gql,true)->then(function(Results $response) {
             return $response->getData();
@@ -30,7 +31,7 @@ class GetShowrooms
      *
      * @return Query
      */
-    public static function getQuery(int $first, int $page, ?FiltersCollection $filters, array $subSelections): Query
+    public static function getQuery(int $first, int $page, ?FiltersCollection $filters, array $subSelections, ?SearchDTO $search): Query
     {
         $arguments = [
             'first' => $first,
@@ -41,6 +42,9 @@ class GetShowrooms
             $arguments = array_merge($arguments, ['filters' => $filters->createQueryArgument()]);
         }
 
+        if(!is_null($search)) {
+            $arguments = array_merge($arguments, ['search' => $search->createQueryArgument()]);
+        }
 
         $gql = (new Query('showrooms'))
             ->setArguments($arguments)
@@ -51,6 +55,7 @@ class GetShowrooms
                     )
                 ]
             );
+
 
         return $gql;
     }

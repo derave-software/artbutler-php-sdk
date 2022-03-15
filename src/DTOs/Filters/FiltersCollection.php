@@ -34,14 +34,11 @@ class FiltersCollection
     {
         $filtersQuery = [];
         foreach($this->filters as $filter) {
-            $filtersQuery[]=$filter->createArgumentQuery();
+            $filtersQuery[] = $filter->createArgumentQuery();
         }
- 
+
         return new RawObject('[
         '.implode(',', $filtersQuery).'
                       ]');
-
-
-
     }
 }
