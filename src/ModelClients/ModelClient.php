@@ -11,11 +11,20 @@ use Illuminate\Support\Arr;
 abstract class ModelClient
 {
     protected GraphQLClient $apiClient;
-
+    protected string $tenantId;
+    
     public function __construct(protected Client $client)
     {
         $this->apiClient = (new GraphQLClient($client));
     }
+
+    public function setTenantId(string $tenantId): static
+    {
+        $this->client->setTenant($tenantId);
+
+        return $this;
+    }
+
 
     public function resolvePromises(array|Promise $promises): array
     {
@@ -25,8 +34,6 @@ abstract class ModelClient
 
     public function getTenantId(): string
     {
-        return $this->client->tenantId;
+        return $this->client->getTenant();
     }
-
-
 }

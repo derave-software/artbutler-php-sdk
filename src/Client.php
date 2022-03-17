@@ -8,7 +8,8 @@ use Firebase\JWT\JWT;
 class Client
 {
     private Auth $auth;
-
+    protected string $tenant = '';
+    
     public function __construct(
         public string $gqlEndpoint,
         private string $keycloakBaseUrl,
@@ -16,7 +17,6 @@ class Client
         private string $clientId,
         private string $clientSecret,
         private string $publicKey,
-        public string $tenantId
     )
     {
         $this->auth = (new Auth(
@@ -26,6 +26,18 @@ class Client
             $this->clientSecret,
             $this->publicKey
         ));
+    }
+
+    public function setTenant(string $tenant): static
+    {
+        $this->tenant = $tenant;
+        
+        return $this;
+    }
+
+    public function getTenant(): string
+    {
+        return $this->tenant;
     }
 
     public function getToken(): string

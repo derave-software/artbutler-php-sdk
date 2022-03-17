@@ -19,19 +19,23 @@ class GraphQLClient extends \GraphQL\Client
 
     public function __construct(protected Client $client, array $httpOptions = [])
     {
-        parent::__construct($client->gqlEndpoint, [],
-            [
-                'headers' => [
-                    'Tenant' => $client->tenantId
-                ],
-            ],
+        parent::__construct($client->gqlEndpoint, [], [],
             new \GuzzleHttp\Client($httpOptions)
         );
     }
 
-    public function setToken(): void
+    protected function setTenant(): static
+    {
+        $this->httpHeaders['Tenant'] = $this->client->getTenant();
+
+        return $this;
+    }
+
+    public function setToken(): static
     {
         $this->httpHeaders['Authorization'] = 'Bearer ' . $this->client->getToken();
+
+        return $this;
     }
 
     public function runQueryAsync($query, bool $resultsAsArray = false, array $variables = []): Promise
@@ -50,7 +54,8 @@ class GraphQLClient extends \GraphQL\Client
 
     public function runRawQueryAsync(string $queryString, $resultsAsArray = false, array $variables = []): Promise
     {
-        $this->setToken();
+        $this->setToken()
+        ->setTenant();
 
         $request = new Request($this->requestMethod, $this->endpointUrl);
 
