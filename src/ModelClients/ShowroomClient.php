@@ -41,7 +41,7 @@ class ShowroomClient extends ModelClient
     {
         return (new GetShowrooms($this->apiClient))($first, $page, $filters, [
             ...Showroom::getSubSelectionArray(),
-            GetWorks::getQuery(10000, 1, [], null)
+            GetWorks::getQuery($first, $page, CESWork::getSubSelectionArray(), null)
         ]);
     }
 
