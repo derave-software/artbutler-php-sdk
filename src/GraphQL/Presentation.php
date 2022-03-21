@@ -24,6 +24,12 @@ class Presentation implements HasSubSelection
             'published',
             'public_url',
             'password',
+            (new Query('configPrices'))->setSelectionSet(
+                [
+                    'withTax',
+                    'priceType',
+                ]
+            ),
             Utils::getAttachment('images'),
             Utils::getAttachment('documents'),
             Utils::getAttachment('coverImageAttachment'),
