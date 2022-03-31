@@ -37,11 +37,19 @@ class ShowroomClient extends ModelClient
         return (new GetShowroom($this->apiClient))($id);
     }
 
-    public function getShowroomsWithWorks(int $first, int $page, ?FiltersCollection $filters = null): Promise
+    public function getShowroomsWithWorks(int $first, int $page, ?FiltersCollection $filters = null, ?SearchDTO $workSearch = null): Promise
     {
         return (new GetShowrooms($this->apiClient))($first, $page, $filters, [
             ...Showroom::getSubSelectionArray(),
             GetWorks::getQuery($first, $page, CESWork::getSubSelectionArray(), null)
+        ]);
+    }
+
+    public function getShowroomsWithWorksViaWorksSearch(int $first, int $page, ?FiltersCollection $filters = null, ?SearchDTO $workSearch = null): Promise
+    {
+        return (new GetShowrooms($this->apiClient))($first, $page, $filters, [
+            ...Showroom::getSubSelectionArray(),
+            GetWorks::getQuery($first, $page, CESWork::getSubSelectionArray(), null, $workSearch)
         ]);
     }
 

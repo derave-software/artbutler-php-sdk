@@ -1,6 +1,7 @@
 <?php
 namespace ArtbutlerPhpSdk\Queries\Work;
 use ArtbutlerPhpSdk\DTOs\Filters\FiltersCollection;
+use ArtbutlerPhpSdk\DTOs\SearchDTO;
 use ArtbutlerPhpSdk\DTOs\WorkDTO;
 use ArtbutlerPhpSdk\GraphQL\Work;
 use ArtbutlerPhpSdk\GraphQLClient;
@@ -47,7 +48,7 @@ class GetWorks
      *
      * @return Query
      */
-    public static function getQuery(int $first, int $page, array $subSelections, ?FiltersCollection $filters): Query
+    public static function getQuery(int $first, int $page, array $subSelections, ?FiltersCollection $filters = null, ?SearchDTO $search = null): Query
     {
         $arguments = [
             'first' => $first,
@@ -56,6 +57,10 @@ class GetWorks
 
         if(!is_null($filters)) {
             $arguments = array_merge($arguments, ['filters' => $filters->createQueryArgument()]);
+        }
+
+        if(!is_null($search)) {
+            $arguments = array_merge($arguments, ['search' => $search->createQueryArgument()]);
         }
 
         $gql = (new Query('works'))
