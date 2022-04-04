@@ -35,6 +35,8 @@ class Presentation implements HasSubSelection
             Utils::getAttachment('coverImageAttachment'),
             'enquire_email',
             'fallback_email',
+            'enquire_email',
+            'fallback_email',
             'font',
             'font_url'
         ];

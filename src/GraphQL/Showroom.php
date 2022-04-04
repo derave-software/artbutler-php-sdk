@@ -27,6 +27,7 @@ class Showroom implements HasSubSelection
                 Tag::getSubSelectionArray()
             ),
             'enquire_email',
+            'password',
             'show_social_links',
             'enable_favorite',
             'show_enquire',
@@ -34,6 +35,7 @@ class Showroom implements HasSubSelection
             'works_count',
             'url',
             'show_logo',
+            'logo_fallback',
             'include_taxes'
         ];
     }
