@@ -27,6 +27,7 @@ class Showroom implements HasSubSelection
                 Tag::getSubSelectionArray()
             ),
             'enquire_email',
+            'fallback_email',
             'password',
             'show_social_links',
             'enable_favorite',

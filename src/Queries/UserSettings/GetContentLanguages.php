@@ -22,7 +22,7 @@ class GetContentLanguages
             ->setSelectionSet(
                 empty($subSelections) ? ContentLanguages::getSubSelectionArray() : $subSelections
             );
-
+        
         return $this->apiClient->runQueryAsync($gql,true)->then(function(Results $response) {
             return $response->getData();
         });
