@@ -20,7 +20,7 @@ class GetContentLanguages
         $gql = (new Query('contentLanguagesSettings'))
             ->setArguments(['id' => $id])
             ->setSelectionSet(
-                empty($subSelections) ? ContentLanguages::getSubSelectionArray() : $subSelection
+                empty($subSelections) ? ContentLanguages::getSubSelectionArray() : $subSelections
             );
         
         return $this->apiClient->runQueryAsync($gql,true)->then(function(Results $response) {
