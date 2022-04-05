@@ -5,6 +5,7 @@ use ArtbutlerPhpSdk\DTOs\Filters\FiltersCollection;
 use ArtbutlerPhpSdk\DTOs\WorkDTO;
 
 use ArtbutlerPhpSdk\Queries\UserSettings\GetContentLanguages;
+use ArtbutlerPhpSdk\Queries\UserSettings\GetGeneralSettings;
 use ArtbutlerPhpSdk\Queries\UserSettings\GetShowroomSettings;
 use GuzzleHttp\Promise\Promise;
 use ArtbutlerPhpSdk\Queries\Work\GetWorks;
@@ -25,5 +26,10 @@ class UserSettingsClient extends ModelClient
     {
         $id = $id ?? $this->getTenantId();
         return (new GetShowroomSettings($this->apiClient))($id);
+    }
+    public function getGeneralSettings(?string $id = null): Promise
+    {
+        $id = $id ?? $this->getTenantId();
+        return (new GetGeneralSettings($this->apiClient))($id);
     }
 }
