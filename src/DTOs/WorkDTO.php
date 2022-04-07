@@ -37,6 +37,7 @@ class WorkDTO
         public string $created_at,
         public array $prices,
         public array $artists,
+        public ?string $shopifyId
     ){
     }
 
@@ -76,6 +77,7 @@ class WorkDTO
             isset($data['created_at']) ? $data['created_at'] : [],
             isset($data['prices']) ? $data['prices'] : [],
             isset($data['artists']) ? $data['artists'] : [],
+            isset($data['shopify_id']) ? $data['shopify_id'] : null,
         );
     }
 

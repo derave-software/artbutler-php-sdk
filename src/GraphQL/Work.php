@@ -39,6 +39,7 @@ class Work implements HasSubSelection
                 'to'
             ]),
             'video_url',
+            'shopify_id',
             'owner',
             'stock_holder',
             static::getDimension('work_size'),
