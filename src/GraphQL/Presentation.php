@@ -38,7 +38,8 @@ class Presentation implements HasSubSelection
             'enquire_email',
             'fallback_email',
             'font',
-            'font_url'
+            'font_url',
+            'show_cover_image'
         ];
     }
 
