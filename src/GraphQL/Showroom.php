@@ -37,7 +37,9 @@ class Showroom implements HasSubSelection
             'url',
             'show_logo',
             'logo_fallback',
-            'include_taxes'
+            'include_taxes',
+            'font',
+            'font_url'
         ];
     }
 
