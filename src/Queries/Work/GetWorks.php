@@ -60,7 +60,10 @@ class GetWorks
         }
 
         if(!is_null($search)) {
-            $arguments = array_merge($arguments, ['search' => $search->createQueryArgument()]);
+            $arguments = array_merge($arguments, [
+                'search' => $search->createQueryArgument()]
+                
+            );
         }
 
         $gql = (new Query('works'))

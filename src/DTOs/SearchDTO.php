@@ -9,6 +9,7 @@ class SearchDTO
     public function __construct(
         public ?string $search,
         public string $langcode,
+        public array $fields = []
     )
     {
     }
@@ -28,10 +29,12 @@ class SearchDTO
 
     public function createQueryArgument()
     {
+        $fields = empty($this->fields) ? '' : 'fields: ["'. implode('","', $this->fields) .'"]';
+
         return new RawObject('{
           search: "'. $this->search .'"
           langcode: "'. $this->langcode .'"
-              }');
+           '.$fields.'}');
 
     }
 }
