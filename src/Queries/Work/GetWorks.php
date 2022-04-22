@@ -62,7 +62,7 @@ class GetWorks
         if(!is_null($search)) {
             $arguments = array_merge($arguments, [
                 'search' => $search->createQueryArgument()]
-                
+
             );
         }
 
@@ -75,7 +75,6 @@ class GetWorks
                     )
                 ]
             );
-
 
         return $gql;
     }
