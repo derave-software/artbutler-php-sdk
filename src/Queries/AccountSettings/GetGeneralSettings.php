@@ -1,6 +1,6 @@
 <?php
 
-namespace ArtbutlerPhpSdk\Queries\UserSettings;
+namespace ArtbutlerPhpSdk\Queries\AccountSettings;
 use ArtbutlerPhpSdk\DTOs\WorkDTO;
 use ArtbutlerPhpSdk\GraphQL\GeneralSettings;
 use ArtbutlerPhpSdk\GraphQL\Work;
