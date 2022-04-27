@@ -29,7 +29,7 @@ class SearchDTO
 
     public function createQueryArgument()
     {
-        $fields = empty($this->fields) ? '' : 'specifiedColumnsToSearch: ["'. implode('","', $this->fields) .'"]';
+        $fields = empty($this->fields) ? '' : 'columns: ["'. implode('","', $this->fields) .'"]';
 
         return new RawObject('{
           search: "'. $this->search .'"
