@@ -5,6 +5,7 @@ use ArtbutlerPhpSdk\DTOs\Filters\FiltersCollection;
 use ArtbutlerPhpSdk\DTOs\SearchDTO;
 use ArtbutlerPhpSdk\DTOs\WorkDTO;
 use ArtbutlerPhpSdk\GraphQL\CESWork;
+use ArtbutlerPhpSdk\GraphQL\ShowroomWork;
 use ArtbutlerPhpSdk\GraphQL\Showroom;
 use ArtbutlerPhpSdk\GraphQL\Work;
 use ArtbutlerPhpSdk\Queries\Work\GetWorks;
@@ -41,7 +42,7 @@ class ShowroomClient extends ModelClient
     {
         return (new GetShowrooms($this->apiClient))($first, $page, $showroomFilters, [
             ...Showroom::getSubSelectionArray(),
-            GetWorks::getQuery($first, $page, CESWork::getSubSelectionArray(), $worksFilters)
+            GetWorks::getQuery($first, $page, ShowroomWork::getSubSelectionArray(), $worksFilters)
         ]);
     }
 
@@ -49,7 +50,7 @@ class ShowroomClient extends ModelClient
     {
         return (new GetShowrooms($this->apiClient))($first, $page, $filters, [
             ...Showroom::getSubSelectionArray(),
-            GetWorks::getQuery($first, $page, CESWork::getSubSelectionArray(), $worksFilters, $workSearch)
+            GetWorks::getQuery($first, $page, ShowroomWork::getSubSelectionArray(), $worksFilters, $workSearch)
         ]);
     }
 
@@ -67,7 +68,7 @@ class ShowroomClient extends ModelClient
     {
         $subSelections = [
             ...Showroom::getSubSelectionArray(),
-            GetWorks::getQuery($first, $page, CESWork::getSubSelectionArray(), $filters)
+            GetWorks::getQuery($first, $page, ShowroomWork::getSubSelectionArray(), $filters)
         ];
 
         return (new GetShowroom($this->apiClient))($id, $subSelections);
