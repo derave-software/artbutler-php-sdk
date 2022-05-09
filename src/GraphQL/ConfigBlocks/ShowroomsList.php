@@ -36,6 +36,12 @@ class ShowroomsList implements HasSubSelection, IsInlineFragment
                 [
                     Documents::getInlineFragment()
                 ]
+            ),
+            (new Query('order'))->setSelectionSet(
+                [
+                    'column',
+                    'direction'
+                ]
             )
 
         ];

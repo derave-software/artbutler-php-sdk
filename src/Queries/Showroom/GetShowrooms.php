@@ -1,13 +1,17 @@
 <?php
 namespace ArtbutlerPhpSdk\Queries\Showroom;
 use ArtbutlerPhpSdk\DTOs\Filters\FiltersCollection;
+use ArtbutlerPhpSdk\DTOs\OrderDTO;
 use ArtbutlerPhpSdk\DTOs\SearchDTO;
 use ArtbutlerPhpSdk\GraphQLClient;
 use ArtbutlerPhpSdk\GraphQL\Showroom;
 use ArtbutlerPhpSdk\GraphQL\Work;
 use GraphQL\Query;
 use GraphQL\Results;
+use GraphQL\Variable;
+use GraphQL\RawObject;
 use GuzzleHttp\Promise\Promise;
+use GraphQL\QueryBuilder\QueryBuilder;
 
 class GetShowrooms
 {
@@ -15,9 +19,16 @@ class GetShowrooms
     {
     }
 
-    public function __invoke(int $first, int $page, ?FiltersCollection $filters = null, array $subSelections = [], ?SearchDTO $search = null): Promise
+    public function __invoke(
+        int $first,
+        int $page,
+        ?FiltersCollection $filters = null,
+        array $subSelections = [],
+        ?SearchDTO $search = null,
+        ?OrderDTO $order = null
+    ): Promise
     {
-        $gql = self::getQuery($first, $page, $filters, $subSelections, $search);
+        $gql = self::getQuery($first, $page, $filters, $subSelections, $search, $order);
 
         return $this->apiClient->runQueryAsync($gql,true)->then(function(Results $response) {
             return $response->getData();
@@ -31,7 +42,14 @@ class GetShowrooms
      *
      * @return Query
      */
-    public static function getQuery(int $first, int $page, ?FiltersCollection $filters, array $subSelections, ?SearchDTO $search): Query
+    public static function getQuery(
+        int $first,
+        int $page,
+        ?FiltersCollection $filters,
+        array $subSelections,
+        ?SearchDTO $search,
+        ?OrderDTO $order
+    ): Query
     {
         $arguments = [
             'first' => $first,
@@ -46,6 +64,11 @@ class GetShowrooms
             $arguments = array_merge($arguments, ['search' => $search->createQueryArgument()]);
         }
 
+        if(!is_null($order)) {
+            $arguments = array_merge($arguments, ['order' => $order->createQueryArgument()]
+            );
+        }
+
         $gql = (new Query('showrooms'))
             ->setArguments($arguments)
             ->setSelectionSet(
@@ -55,7 +78,6 @@ class GetShowrooms
                     )
                 ]
             );
-
 
         return $gql;
     }

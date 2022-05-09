@@ -2,6 +2,7 @@
 namespace ArtbutlerPhpSdk\ModelClients;
 
 use ArtbutlerPhpSdk\DTOs\Filters\FiltersCollection;
+use ArtbutlerPhpSdk\DTOs\OrderDTO;
 use ArtbutlerPhpSdk\DTOs\SearchDTO;
 use ArtbutlerPhpSdk\DTOs\WorkDTO;
 use ArtbutlerPhpSdk\GraphQL\CESWork;
@@ -24,9 +25,15 @@ class ShowroomClient extends ModelClient
      * @param array $filters
      * @return Promise
      */
-    public function getShowrooms(int $first, int $page, ?FiltersCollection $filters = null, ?SearchDTO $search = null): Promise
+    public function getShowrooms(
+        int $first, 
+        int $page, 
+        ?FiltersCollection $filters = null, 
+        ?SearchDTO $search = null,
+        ?OrderDTO $order = null
+    ): Promise
     {
-        return (new GetShowrooms($this->apiClient))($first, $page, $filters, [], $search);
+        return (new GetShowrooms($this->apiClient))($first, $page, $filters, [], $search, $order);
     }
 
     /**
