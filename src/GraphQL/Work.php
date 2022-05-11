@@ -53,6 +53,7 @@ class Work implements HasSubSelection
             Utils::getAttachment('images'),
             Utils::getAttachment('documents'),
             'created_at',
+            'visible_in_viewer',
             static::getPrices(),
             (new Query('artists'))->setSelectionSet(
                 [
