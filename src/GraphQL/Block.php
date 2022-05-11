@@ -6,6 +6,7 @@ use ArtbutlerPhpSdk\GraphQL\ConfigBlocks\ArtistsList;
 use ArtbutlerPhpSdk\GraphQL\ConfigBlocks\Documents;
 use ArtbutlerPhpSdk\GraphQL\ConfigBlocks\ShowroomDetails;
 use ArtbutlerPhpSdk\GraphQL\ConfigBlocks\ShowroomsList;
+use ArtbutlerPhpSdk\GraphQL\ConfigBlocks\WorksList;
 use ArtbutlerPhpSdk\GraphQL\VocabularyItem;
 use ArtbutlerPhpSdk\GraphQL\Shared\File;
 use ArtbutlerPhpSdk\GraphQL\Shared\Tag;
@@ -24,7 +25,8 @@ class Block implements HasSubSelection
                     [
                         ShowroomsList::getInlineFragment(),
                         ShowroomDetails::getInlineFragment(),
-                        Documents::getInlineFragment()
+                        Documents::getInlineFragment(),
+                        WorksList::getInlineFragment()
                     ]
                 )
             ];

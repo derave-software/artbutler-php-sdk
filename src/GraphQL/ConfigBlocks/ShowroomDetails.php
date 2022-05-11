@@ -27,11 +27,9 @@ class ShowroomDetails implements HasSubSelection, IsInlineFragment
     {
         return  [
             'slug',
-            'visibleFields',
+            (new Query('visibleFields', 'ShowroomDetails_visibleFields')),
             (new Query('subsections'))->setSelectionSet(
                 [
-                    WorksList::getInlineFragment(),
-                    WorksSlider::getInlineFragment(),
                     Documents::getInlineFragment()
                 ]
             )

@@ -10,6 +10,7 @@ use ArtbutlerPhpSdk\GraphQL\Shared\Tag;
 use ArtbutlerPhpSdk\GraphQL\Concerns\HasSubSelection;
 use GraphQL\InlineFragment;
 use GraphQL\Query;
+use GraphQL\RawObject;
 
 class WorksList implements HasSubSelection, IsInlineFragment
 {
@@ -31,7 +32,7 @@ class WorksList implements HasSubSelection, IsInlineFragment
             'type',
             'slug',
             'layout',
-            'visibleFields',
+            (new Query('visibleFields', 'WorksList_visibleFields')),
             'enquireEnabled',
             'favoritesEnabled',
             'active',
@@ -39,6 +40,12 @@ class WorksList implements HasSubSelection, IsInlineFragment
                 [
                     'withTax',
                     'priceType'
+                ]
+            ),
+            (new Query('subsections'))
+                ->setSelectionSet(
+                [
+                    WorksSlider::getInlineFragment(),
                 ]
             )
         ];
