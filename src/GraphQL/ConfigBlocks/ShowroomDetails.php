@@ -28,12 +28,6 @@ class ShowroomDetails implements HasSubSelection, IsInlineFragment
         return  [
             'slug',
             (new Query('visibleFields', 'ShowroomDetails_visibleFields')),
-            (new Query('subsections'))->setSelectionSet(
-                [
-                    Documents::getInlineFragment()
-                ]
-            )
-
         ];
     }
 
