@@ -21,12 +21,14 @@ class Filter
 
     public function createArgumentQuery(): string
     {
+        $this->data = is_null($this->data) ? 'null' : '"'. $this->data . '"';
+        
         return '
         {
             type: "'.$this->type.'",
             value: {
                 operator: '.$this->operator.',
-                data: "'.$this->data.'"
+                data: '.$this->data.'
             }
          }';
     }
