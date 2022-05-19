@@ -11,6 +11,7 @@ class GeneralSettings implements HasSubSelection
     {
         return [
             'id',
+            'tax_label',
             (new Query('social_media'))->setSelectionSet(
                 [
                     'url',
