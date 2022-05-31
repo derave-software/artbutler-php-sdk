@@ -33,7 +33,7 @@ class WorksList implements HasSubSelection, IsInlineFragment
             'slug',
             'layout',
             (new Query('visibleFields', 'WorksList_visibleFields')),
-            'enquireEnabled',
+            'enquire',
             'favoritesEnabled',
             'active',
             (new Query('prices'))->setSelectionSet(

@@ -30,7 +30,7 @@ class WorksSlider implements HasSubSelection, IsInlineFragment
             'slug',
             'layout',
             'visibleFields',
-            'enquireEnabled',
+            'enquire',
             'favoritesEnabled',
             'active',
             (new Query('prices'))->setSelectionSet(
