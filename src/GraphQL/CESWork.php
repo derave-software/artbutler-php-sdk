@@ -12,10 +12,17 @@ class CESWork extends Work implements HasSubSelection
 {
     public static function getSubSelectionArray(): array
     {
-        return [
-            ...parent::getSubSelectionArray(),
-            'price_type',
-            'price_description',
-        ];
+        return array_values(static::getAvailableSubselections());
+    }
+
+    public static function getAvailableSubselections(): array
+    {
+        return array_merge(
+            parent::getAvailableSubselections(),
+            [
+                "price_type" => 'price_type',
+                "price_description" => 'price_description',
+            ]
+        );
     }
 }

@@ -26,9 +26,9 @@ class ShowroomClient extends ModelClient
      * @return Promise
      */
     public function getShowrooms(
-        int $first, 
-        int $page, 
-        ?FiltersCollection $filters = null, 
+        int $first,
+        int $page,
+        ?FiltersCollection $filters = null,
         ?SearchDTO $search = null,
         ?OrderDTO $order = null
     ): Promise
@@ -71,11 +71,13 @@ class ShowroomClient extends ModelClient
         string $id,
         int $first,
         int $page,
-        ?FiltersCollection $filters = null): Promise
+        ?FiltersCollection $filters = null,
+        array $workSubSelections = []
+    ): Promise
     {
         $subSelections = [
             ...Showroom::getSubSelectionArray(),
-            GetWorks::getQuery($first, $page, ShowroomWork::getSubSelectionArray(), $filters)
+            GetWorks::getQuery($first, $page,$workSubSelections ?? ShowroomWork::getSubSelectionArray(), $filters)
         ];
 
         return (new GetShowroom($this->apiClient))($id, $subSelections);

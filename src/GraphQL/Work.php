@@ -12,58 +12,7 @@ class Work implements HasSubSelection
 {
     public static function getSubSelectionArray(): array
     {
-        return [
-            'id',
-            'inventory_id',
-            'draft',
-            'human_readable_id',
-            Utils::getVocabularyItem('status'),
-            Utils::getVocabularyItem('location'),
-            Utils::getVocabularyItem('type'),
-            Utils::getVocabularyItem('technique'),
-            Utils::getFile('main_image'),
-            Utils::getTranslation('title'),
-            Utils::getTranslation('description'),
-            Utils::getTranslation('comment'),
-            Utils::getTranslation('edition'),
-            Utils::getTranslation('signature'),
-            Utils::getTranslation('provenance'),
-            Utils::getTranslation('literature'),
-            Utils::getTranslation('exhibitions'),
-            Utils::getTranslation('dimensions_description'),
-            (new Query('year'))->setSelectionSet([
-                'type',
-                'description',
-                'exact',
-                'from',
-                'to'
-            ]),
-            'video_url',
-            'owner',
-            'stock_holder',
-            static::getDimension('work_size'),
-            static::getDimension('frame_size'),
-            static::getDimension('transport_size'),
-            static::getDimension('plate_size'),
-            static::getDimension('plinth_size'),
-            static::getDimension('vitrine_size'),
-            (new Query('tags'))->setSelectionSet(
-                Tag::getSubSelectionArray()
-            ),
-            Utils::getAttachment('images'),
-            Utils::getAttachment('documents'),
-            'created_at',
-            'visible_in_viewer',
-            static::getPrices(),
-            (new Query('artists'))->setSelectionSet(
-                [
-                    'id',
-                    'first_name',
-                    'last_name',
-
-                ]
-            )
-        ];
+        return array_values(static::getAvailableSubselections());
     }
 
     public static function getPrices(): Query
@@ -92,5 +41,66 @@ class Work implements HasSubSelection
             ]
         );
     }
+
+    public static function getAvailableSubselections(): array
+    {
+        return [
+            "id"=> 'id',
+            "draft" => 'draft',
+            "human_readable_id" => 'human_readable_id',
+            "main_image" => Utils::getFile('main_image'),
+            "created_at"=> 'created_at',
+            "visible_in_viewer" => 'visible_in_viewer',
+            "prices" => static::getPrices(),
+
+            "images" => Utils::getAttachment('images'),
+            "documents" => Utils::getAttachment('documents'),
+            "title"=>Utils::getTranslation('title'),
+            "description"=>Utils::getTranslation('description'),
+            'year' =>(new Query('year'))->setSelectionSet([
+                'type',
+                'description',
+                'exact',
+                'from',
+                'to'
+            ]),
+            'artists'=>(new Query('artists'))->setSelectionSet(
+                [
+                    'id',
+                    'first_name',
+                    'last_name',
+
+                ]
+            ),
+            'technique'=>Utils::getVocabularyItem('technique'),
+            'dimensions_description' => Utils::getTranslation('dimensions_description'),
+            'edition' => Utils::getTranslation('edition'),
+            'type' => Utils::getVocabularyItem('type'),
+            'status'=>Utils::getVocabularyItem('status'),
+            'inventory_id'=>'inventory_id',
+            'location' =>Utils::getVocabularyItem('location'),
+            'signature' => Utils::getTranslation('signature'),
+            'tags' => (new Query('tags'))->setSelectionSet(
+                Tag::getSubSelectionArray()
+            ),
+            "video_url"=>'video_url',
+            "owner" => 'owner',
+            "stock_holder" => 'stock_holder',
+            "provenance" => Utils::getTranslation('provenance'),
+            "exhibitions" => Utils::getTranslation('exhibitions'),
+            "comment" => Utils::getTranslation('comment'),
+            "literature" => Utils::getTranslation('literature'),
+            "work_size" => static::getDimension('work_size'),
+            "frame_size" => static::getDimension('frame_size'),
+            "transport_size" => static::getDimension('transport_size'),
+            "plate_size" => static::getDimension('plate_size'),
+            "plinth_size" => static::getDimension('plinth_size'),
+            "vitrine_size" => static::getDimension('vitrine_size'),
+            "images" => Utils::getAttachment('images'),
+            "documents" => Utils::getAttachment('documents'),
+        ];
+    }
+
+
 
 }

@@ -10,12 +10,19 @@ use GraphQL\Query;
 
 class ShowroomWork extends CESWork
 {
+
     public static function getSubSelectionArray(): array
     {
-        return [
-            ...parent::getSubSelectionArray(),
-            'visible_in_viewer'
-        ];
+        return array_values(static::getAvailableSubselections());
     }
 
+    public static function getAvailableSubselections(): array
+    {
+        return array_merge(
+            parent::getAvailableSubselections(),
+            [
+                "visible_in_viewer" => 'visible_in_viewer',
+            ]
+        );
+    }
 }
