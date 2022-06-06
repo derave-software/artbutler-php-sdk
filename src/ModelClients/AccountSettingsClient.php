@@ -4,6 +4,7 @@ namespace ArtbutlerPhpSdk\ModelClients;
 use ArtbutlerPhpSdk\DTOs\Filters\FiltersCollection;
 use ArtbutlerPhpSdk\DTOs\WorkDTO;
 
+use ArtbutlerPhpSdk\Queries\AccountSettings\GetAllSettingsInOneQuery;
 use ArtbutlerPhpSdk\Queries\AccountSettings\GetContentLanguages;
 use ArtbutlerPhpSdk\Queries\AccountSettings\GetGeneralSettings;
 use ArtbutlerPhpSdk\Queries\AccountSettings\GetShowroomSettings;
@@ -33,4 +34,13 @@ class AccountSettingsClient extends ModelClient
         $id = $id ?? $this->getTenantId();
         return (new GetGeneralSettings($this->apiClient))($id);
     }
+
+    public function getAllSettingsInOneQuery(?string $id = null): Promise
+    {
+        $id = $id ?? $this->getTenantId();
+        
+        return (new GetAllSettingsInOneQuery($this->apiClient))($id );
+    }
+    
+    
 }

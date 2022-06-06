@@ -17,15 +17,26 @@ class GetGeneralSettings
 
     public function __invoke(string $id, array $subSelections = []): Promise
     {
-        $gql = (new Query('accountSettings'))
-            ->setArguments(['id' => $id])
-            ->setSelectionSet(
-                empty($subSelections) ? GeneralSettings::getSubSelectionArray() : $subSelections
-            );
+        $gql = $this->getQuery($id, $subSelections);
 
         return $this->apiClient->runQueryAsync($gql,true)->then(function(Results $response) {
             return $response->getData();
         });
+    }
+
+    /**
+     * @param  string  $id
+     * @param  array  $subSelections
+     *
+     * @return Query
+     */
+    public function getQuery(string $id, array $subSelections): Query
+    {
+        return (new Query('accountSettings'))
+            ->setArguments(['id' => $id])
+            ->setSelectionSet(
+                empty($subSelections) ? GeneralSettings::getSubSelectionArray() : $subSelections
+            );
     }
 
 }

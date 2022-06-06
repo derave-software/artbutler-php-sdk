@@ -2,15 +2,14 @@
 
 namespace ArtbutlerPhpSdk\Queries\AccountSettings;
 use ArtbutlerPhpSdk\DTOs\WorkDTO;
-use ArtbutlerPhpSdk\GraphQL\Shared\ContentLanguages;
-use ArtbutlerPhpSdk\GraphQL\ShowroomSettings;
+use ArtbutlerPhpSdk\GraphQL\GeneralSettings;
 use ArtbutlerPhpSdk\GraphQL\Work;
 use ArtbutlerPhpSdk\GraphQLClient;
 use GraphQL\Query;
 use GraphQL\Results;
 use GuzzleHttp\Promise\Promise;
 
-class GetShowroomSettings
+class GetAllSettingsInOneQuery
 {
     public function __construct(protected GraphQLClient $apiClient)
     {
@@ -19,7 +18,7 @@ class GetShowroomSettings
     public function __invoke(string $id, array $subSelections = []): Promise
     {
         $gql = $this->getQuery($id, $subSelections);
-        
+
         return $this->apiClient->runQueryAsync($gql,true)->then(function(Results $response) {
             return $response->getData();
         });
@@ -31,13 +30,17 @@ class GetShowroomSettings
      *
      * @return Query
      */
-    public function getQuery(string $id, array $subSelections): Query
+    private function getQuery(string $id, array $subSelections):  Query
     {
-        return (new Query('showroomsSettings'))
-            ->setArguments(['id' => $id])
-            ->setSelectionSet(
-                empty($subSelections) ? ShowroomSettings::getSubSelectionArray() : $subSelections
-            );
+        $contentLanguages = (new GetContentLanguages($this->apiClient))->getQuery($id, []);
+        $showroomSettings = (new GetShowroomSettings($this->apiClient))->getQuery($id, []);
+        $generalSettings = (new GetGeneralSettings($this->apiClient))->getQuery($id, []);
+        
+        return (new Query())->setSelectionSet([
+            $contentLanguages,
+            $showroomSettings,
+            $generalSettings
+        ]);
     }
 
 }
