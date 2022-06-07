@@ -54,6 +54,7 @@ class GraphQLClient extends \GraphQL\Client
 
     public function runRawQueryAsync(string $queryString, $resultsAsArray = false, array $variables = []): Promise
     {
+
         $this->setToken()
         ->setTenant();
 

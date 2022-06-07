@@ -35,12 +35,12 @@ class AccountSettingsClient extends ModelClient
         return (new GetGeneralSettings($this->apiClient))($id);
     }
 
-    public function getAllSettingsInOneQuery(?string $id = null): Promise
+    public function getAllSettingsInOneQuery(?string $id = null, string $translationsGroup): Promise
     {
         $id = $id ?? $this->getTenantId();
-        
-        return (new GetAllSettingsInOneQuery($this->apiClient))($id );
+
+        return (new GetAllSettingsInOneQuery($this->apiClient))($id,$translationsGroup);
     }
-    
-    
+
+
 }
