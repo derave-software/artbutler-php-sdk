@@ -77,7 +77,7 @@ class ShowroomClient extends ModelClient
     {
         $subSelections = [
             ...Showroom::getSubSelectionArray(),
-            GetWorks::getQuery($first, $page,$workSubSelections ?? ShowroomWork::getSubSelectionArray(), $filters)
+            GetWorks::getQuery($first, $page,empty($workSubSelections) ?  ShowroomWork::getSubSelectionArray() : $workSubSelections, $filters)
         ];
 
         return (new GetShowroom($this->apiClient))($id, $subSelections);

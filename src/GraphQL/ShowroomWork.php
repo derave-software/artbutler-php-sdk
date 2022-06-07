@@ -18,6 +18,7 @@ class ShowroomWork extends CESWork
 
     public static function getAvailableSubselections(): array
     {
+
         return array_merge(
             parent::getAvailableSubselections(),
             [
