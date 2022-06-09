@@ -9,6 +9,8 @@ use ArtbutlerPhpSdk\GraphQL\CESWork;
 use ArtbutlerPhpSdk\GraphQL\ShowroomWork;
 use ArtbutlerPhpSdk\GraphQL\Showroom;
 use ArtbutlerPhpSdk\GraphQL\Work;
+use ArtbutlerPhpSdk\Queries\Showroom\GetWorksSlider;
+use ArtbutlerPhpSdk\Queries\Showroom\GetWorksSliderFromShowroom;
 use ArtbutlerPhpSdk\Queries\Work\GetWorks;
 use GraphQL\Query;
 use GuzzleHttp\Promise\Promise;
@@ -72,14 +74,39 @@ class ShowroomClient extends ModelClient
         int $first,
         int $page,
         ?FiltersCollection $filters = null,
-        array $workSubSelections = []
+        array $workSubSelections = [],
+        array $showroomSubselections = []
     ): Promise
     {
+        $showroomSubselections = empty($showroomSubselections) ?  Showroom::getSubSelectionArray() : $showroomSubselections;
         $subSelections = [
-            ...Showroom::getSubSelectionArray(),
+            ...$showroomSubselections,
             GetWorks::getQuery($first, $page,empty($workSubSelections) ?  ShowroomWork::getSubSelectionArray() : $workSubSelections, $filters)
         ];
 
         return (new GetShowroom($this->apiClient))($id, $subSelections);
+    }
+
+    /**
+     * @param int $first works pagination
+     * @param int $page works pagination
+     * @param array $filters works
+     * @return Promise
+     */
+    public function getWorksSlider(
+        string $workId,
+        string $showroomId,
+        array $workSubSelections = [],
+        ?FiltersCollection $filters = null,
+    ): Promise
+    {
+        $workSubSelections =  empty($workSubSelections) ?  ShowroomWork::getSubSelectionArray() : $workSubSelections;
+
+        $subSelections = [
+            'id',
+            \ArtbutlerPhpSdk\Queries\Work\GetWorksSlider::getQuery($workId,empty($workSubSelections) ?  ShowroomWork::getSubSelectionArray() : $workSubSelections, $filters)
+        ];
+
+        return (new GetWorksSliderFromShowroom($this->apiClient))($showroomId, $workId, $subSelections);
     }
 }
