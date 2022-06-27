@@ -4,6 +4,7 @@ namespace ArtbutlerPhpSdk\GraphQL;
 
 use ArtbutlerPhpSdk\GraphQL\Shared\File;
 use ArtbutlerPhpSdk\GraphQL\Shared\FilterInputType;
+use ArtbutlerPhpSdk\GraphQL\Shared\Rgba;
 use GraphQL\Query;
 
 class Utils
@@ -38,11 +39,18 @@ class Utils
             File::getSubSelectionArray()
         );
     }
-    
+
     public static function getFilters(string $fileField):Query
     {
         return (new Query($fileField))->setSelectionSet(
             FilterInputType::getSubSelectionArray()
+        );
+    }
+
+    public static function getRgba(string $rgbaField)
+    {
+        return (new Query($rgbaField))->setSelectionSet(
+            Rgba::getSubSelectionArray()
         );
     }
 

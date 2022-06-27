@@ -39,7 +39,13 @@ class Presentation implements HasSubSelection
             'fallback_email',
             'font',
             'font_url',
-            'show_cover_image'
+            'show_cover_image',
+            Utils::getRgba('primary_color'),
+            Utils::getRgba('secondary_color'),
+            Utils::getRgba('tertiary_color'),
+            Utils::getRgba('background_color'),
+            'primary_font',
+            'secondary_font'
         ];
     }
 
