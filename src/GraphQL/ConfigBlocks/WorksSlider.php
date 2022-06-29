@@ -28,7 +28,6 @@ class WorksSlider implements HasSubSelection, IsInlineFragment
         return  [
             'type',
             'slug',
-            'layout',
             'visibleFields',
             'enquire',
             'favoritesEnabled',
