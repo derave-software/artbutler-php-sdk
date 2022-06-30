@@ -16,7 +16,6 @@ class ShowroomDetails implements HasSubSelection, IsInlineFragment
     public static function getInlineFragment(): InlineFragment
     {
         $subSelectionArray =  self::getSubSelectionArray();
-
         return (new InlineFragment('ShowroomDetails'))
             ->setSelectionSet(
                 $subSelectionArray
