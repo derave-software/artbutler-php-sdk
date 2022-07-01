@@ -27,6 +27,8 @@ class ShowroomDetails implements HasSubSelection, IsInlineFragment
         return  [
             'slug',
             'detailsLayout',
+            'textPosition',
+            Utils::getRgba('textColor'),
             (new Query('visibleFields', 'ShowroomDetails_visibleFields')),
         ];
     }
