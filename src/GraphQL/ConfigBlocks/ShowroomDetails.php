@@ -26,6 +26,7 @@ class ShowroomDetails implements HasSubSelection, IsInlineFragment
     {
         return  [
             'slug',
+            'detailsLayout',
             (new Query('visibleFields', 'ShowroomDetails_visibleFields')),
         ];
     }
