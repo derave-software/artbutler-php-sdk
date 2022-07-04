@@ -32,6 +32,7 @@ class WorksList implements HasSubSelection, IsInlineFragment
             'type',
             'slug',
             'listLayout',
+            'caption',
             (new Query('visibleFields', 'WorksList_visibleFields')),
             'enquire',
             'favoritesEnabled',

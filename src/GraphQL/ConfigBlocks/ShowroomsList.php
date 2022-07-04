@@ -32,6 +32,7 @@ class ShowroomsList implements HasSubSelection, IsInlineFragment
             (new Query('visibleFields', 'ShowroomList_visibleFields')),
 
             'listLayout',
+            'caption',
             Utils::getTranslation('heading'),
             (new Query('subsections'))->setSelectionSet(
                 [
