@@ -39,15 +39,15 @@ class Showroom implements HasSubSelection
             'logo_fallback',
             'include_taxes',
             'show_cover_image',
-            'font',
-            'font_url',
             Utils::getRgba('primary_color'),
             Utils::getRgba('secondary_color'),
             Utils::getRgba('tertiary_color'),
             Utils::getRgba('background_color'),
             Utils::getRgba('hero_text_color'),
             'primary_font',
-            'secondary_font'
+            'primary_font_url',
+            'secondary_font',
+            'secondary_font_url'
         ];
     }
 
