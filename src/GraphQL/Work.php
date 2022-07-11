@@ -96,8 +96,7 @@ class Work implements HasSubSelection
             "plate_size" => static::getDimension('plate_size'),
             "plinth_size" => static::getDimension('plinth_size'),
             "vitrine_size" => static::getDimension('vitrine_size'),
-            "images" => Utils::getAttachment('images'),
-            "documents" => Utils::getAttachment('documents'),
+            "note" => Utils::getTranslation('note'),
         ];
     }
 
