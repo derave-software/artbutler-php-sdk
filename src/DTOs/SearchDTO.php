@@ -32,7 +32,7 @@ class SearchDTO
         $fields = empty($this->fields) ? '' : 'columns: ["'. implode('","', $this->fields) .'"]';
 
         return new RawObject('{
-          search: "'. $this->search .'"
+          search: "'. urlencode($this->search) .'"
           langcode: "'. $this->langcode .'"
            '.$fields.'}');
 
