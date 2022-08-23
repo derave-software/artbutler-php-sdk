@@ -1,5 +1,5 @@
 <?php
-namespace ArtbutlerPhpSdk\Queries\Documents;
+namespace ArtbutlerPhpSdk\Queries\Attachments;
 use ArtbutlerPhpSdk\DTOs\Filters\FiltersCollection;
 use ArtbutlerPhpSdk\GraphQL\Showroom;
 use ArtbutlerPhpSdk\GraphQLClient;
