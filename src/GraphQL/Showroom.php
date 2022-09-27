@@ -47,7 +47,8 @@ class Showroom implements HasSubSelection
             'primary_font',
             'primary_font_url',
             'secondary_font',
-            'secondary_font_url'
+            'secondary_font_url',
+            'show_buy_button'
         ];
     }
 
