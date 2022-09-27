@@ -37,7 +37,8 @@ class WorksSlider implements HasSubSelection, IsInlineFragment
                     'withTax',
                     'priceType'
                 ]
-            )
+            ),
+            'showBuyButton'
         ];
     }
 

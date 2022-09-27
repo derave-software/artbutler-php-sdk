@@ -48,7 +48,8 @@ class WorksList implements HasSubSelection, IsInlineFragment
                 [
                     WorksSlider::getInlineFragment(),
                 ]
-            )
+            ),
+            'showBuyButton'
         ];
     }
 
