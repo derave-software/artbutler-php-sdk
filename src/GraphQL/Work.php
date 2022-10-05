@@ -97,6 +97,9 @@ class Work implements HasSubSelection
             "plinth_size" => static::getDimension('plinth_size'),
             "vitrine_size" => static::getDimension('vitrine_size'),
             "note" => Utils::getTranslation('note'),
+            "shopify_id" => 'shopify_id',
+            "variants_ids" => 'variants_ids',
+            "exported_to_shopify_at" => 'exported_to_shopify_at',
         ];
     }
 
