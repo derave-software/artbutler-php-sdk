@@ -28,6 +28,16 @@ class Work implements HasSubSelection
         );
     }
 
+    public static function getWeight(string $name): Query
+    {
+        return (new Query($name))->setSelectionSet(
+            [
+                'unit',
+                'value',
+            ]
+        );
+    }
+
     public static function getDimension(string $name): Query
     {
         return (new Query($name))->setSelectionSet(
@@ -100,6 +110,9 @@ class Work implements HasSubSelection
             "shopify_id" => 'shopify_id',
             "variants_ids" => 'variants_ids',
             "exported_to_shopify_at" => 'exported_to_shopify_at',
+            'work_weight' => static::getWeight('work_weight'),
+            'transport_weight' => static::getWeight('transport_weight'),
+            'frame_weight' => static::getWeight('frame_weight'),
         ];
     }
 
