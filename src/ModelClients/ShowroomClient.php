@@ -6,9 +6,12 @@ use ArtbutlerPhpSdk\DTOs\OrderDTO;
 use ArtbutlerPhpSdk\DTOs\SearchDTO;
 use ArtbutlerPhpSdk\DTOs\WorkDTO;
 use ArtbutlerPhpSdk\GraphQL\CESWork;
+use ArtbutlerPhpSdk\GraphQL\Page;
+use ArtbutlerPhpSdk\GraphQL\Presentation;
 use ArtbutlerPhpSdk\GraphQL\ShowroomWork;
 use ArtbutlerPhpSdk\GraphQL\Showroom;
 use ArtbutlerPhpSdk\GraphQL\Work;
+use ArtbutlerPhpSdk\Queries\Presentation\GetPresentation;
 use ArtbutlerPhpSdk\Queries\Showroom\GetWorksSlider;
 use ArtbutlerPhpSdk\Queries\Showroom\GetWorksSliderFromShowroom;
 use ArtbutlerPhpSdk\Queries\Work\GetWorks;
@@ -45,6 +48,26 @@ class ShowroomClient extends ModelClient
     public function getShowroom(string $id): Promise
     {
         return (new GetShowroom($this->apiClient))($id);
+    }
+
+    /**
+     * @param int $first pages pagination
+     * @param int $page pages pagination
+     * @return Promise
+     */
+    public function getShowroomWithPages(
+        string $id,
+    ): Promise
+    {
+        $subSelections = [
+            ...Showroom::getSubSelectionArray(),
+            (new Query('pages'))
+                ->setSelectionSet(
+                    Page::getSubSelectionArray()
+                )
+        ];
+
+        return (new GetShowroom($this->apiClient))($id, $subSelections);
     }
 
     public function getShowroomsWithWorks(int $first, int $page, ?FiltersCollection $showroomFilters = null, ?FiltersCollection $worksFilters = null, ?SearchDTO $workSearch = null): Promise
