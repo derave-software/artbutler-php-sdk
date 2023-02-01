@@ -30,8 +30,6 @@ class Showroom implements HasSubSelection
             'fallback_email',
             'password',
             'show_social_links',
-            'enable_favorite',
-            'show_enquire',
             'theme',
             'works_count',
             'url',
@@ -48,7 +46,6 @@ class Showroom implements HasSubSelection
             'primary_font_url',
             'secondary_font',
             'secondary_font_url',
-            'show_buy_button'
         ];
     }
 
