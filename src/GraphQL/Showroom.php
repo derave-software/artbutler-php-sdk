@@ -41,7 +41,6 @@ class Showroom implements HasSubSelection
             Utils::getRgba('secondary_color'),
             Utils::getRgba('tertiary_color'),
             Utils::getRgba('background_color'),
-            Utils::getRgba('hero_text_color'),
             'primary_font',
             'primary_font_url',
             'secondary_font',
