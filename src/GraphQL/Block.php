@@ -2,18 +2,15 @@
 
 namespace ArtbutlerPhpSdk\GraphQL;
 
-use ArtbutlerPhpSdk\GraphQL\ConfigBlocks\ArtistsList;
+use ArtbutlerPhpSdk\GraphQL\Concerns\HasSubSelection;
 use ArtbutlerPhpSdk\GraphQL\ConfigBlocks\Documents;
 use ArtbutlerPhpSdk\GraphQL\ConfigBlocks\InstallationImages;
+use ArtbutlerPhpSdk\GraphQL\ConfigBlocks\RichText;
 use ArtbutlerPhpSdk\GraphQL\ConfigBlocks\ShowroomDetails;
 use ArtbutlerPhpSdk\GraphQL\ConfigBlocks\ShowroomsList;
 use ArtbutlerPhpSdk\GraphQL\ConfigBlocks\WorksList;
-use ArtbutlerPhpSdk\GraphQL\VocabularyItem;
-use ArtbutlerPhpSdk\GraphQL\Shared\File;
-use ArtbutlerPhpSdk\GraphQL\Shared\Tag;
-use ArtbutlerPhpSdk\GraphQL\Concerns\HasSubSelection;
-use GraphQL\Query;
 use GraphQL\InlineFragment;
+use GraphQL\Query;
 
 class Block implements HasSubSelection
 {
@@ -29,6 +26,7 @@ class Block implements HasSubSelection
                         Documents::getInlineFragment(),
                         WorksList::getInlineFragment(),
                         InstallationImages::getInlineFragment(),
+                        RichText::getInlineFragment(),
                     ]
                 )
             ];
