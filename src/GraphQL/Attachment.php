@@ -5,7 +5,6 @@ namespace ArtbutlerPhpSdk\GraphQL;
 
 
 use ArtbutlerPhpSdk\GraphQL\Concerns\HasSubSelection;
-use ArtbutlerPhpSdk\GraphQL\Shared\File;
 
 class Attachment implements HasSubSelection
 {
@@ -19,6 +18,7 @@ class Attachment implements HasSubSelection
             Utils::getTranslation('description'),
             Utils::getTranslation('copyright'),
             Utils::getTranslation('photographer'),
+            'categories'
         ];
     }
 }
