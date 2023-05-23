@@ -9,7 +9,7 @@ class FiltersCollection
     /**
      * @var array<Filter>
      */
-    public function __construct(protected array $filters = [])
+    public function __construct(public array $filters = [])
     {
     }
 
