@@ -2,9 +2,6 @@
 
 namespace ArtbutlerPhpSdk\GraphQL;
 
-use ArtbutlerPhpSdk\GraphQL\VocabularyItem;
-use ArtbutlerPhpSdk\GraphQL\Shared\File;
-use ArtbutlerPhpSdk\GraphQL\Shared\Tag;
 use ArtbutlerPhpSdk\GraphQL\Concerns\HasSubSelection;
 use GraphQL\Query;
 
@@ -45,7 +42,8 @@ class Presentation implements HasSubSelection
             'primary_font',
             'primary_font_url',
             'secondary_font',
-            'secondary_font_url'
+            'secondary_font_url',
+            'visible_dimension_unit'
         ];
     }
 
