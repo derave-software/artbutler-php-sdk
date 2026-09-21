@@ -32,6 +32,7 @@ class Showroom implements HasSubSelection
             'show_social_links',
             'theme',
             'works_count',
+            'visible_works_count',
             'url',
             'show_logo',
             'logo_fallback',
